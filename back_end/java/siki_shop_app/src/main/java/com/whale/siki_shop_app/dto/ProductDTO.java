@@ -1,14 +1,14 @@
 package com.whale.siki_shop_app.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
@@ -32,5 +32,5 @@ public class ProductDTO {
 //    private LocalDateTime createAt;
 //    private LocalDateTime updateAt;
 
-    private MultipartFile file;
+    private List<MultipartFile> listImage;
 }
