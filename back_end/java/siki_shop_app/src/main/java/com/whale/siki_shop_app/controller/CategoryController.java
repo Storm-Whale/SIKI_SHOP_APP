@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/v1/category")
+@RequestMapping(value = "/${api.prefix}/category")
 public class CategoryController {
 
     @GetMapping(value = "")

@@ -13,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductDTO {
 
-    private Integer id;
-
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 200, message = "Name must be between 3 and 200 characters")
     private String name;
@@ -29,8 +27,6 @@ public class ProductDTO {
 
     @NotNull(message = "Category_ID is required")
     private Integer categoryId;
-//    private LocalDateTime createAt;
-//    private LocalDateTime updateAt;
 
     private List<MultipartFile> listImage;
 }

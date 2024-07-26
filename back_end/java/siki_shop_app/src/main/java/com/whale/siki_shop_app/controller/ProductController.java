@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "api/v1/product")
+@RequestMapping(value = "/${api.prefix}/product")
 public class ProductController {
 
     @GetMapping(value = "")

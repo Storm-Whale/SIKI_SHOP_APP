@@ -10,8 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 public class CategoryDTO {
 
-    private Integer id;
-
     @NotEmpty(message = "Category's name can not be empty")
     private String name;
 }

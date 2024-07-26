@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[USERS]
     [date_of_bird] DATE,
     [phone_number] VARCHAR(10) NOT NULL,
     [address] NVARCHAR(200) DEFAULT '',
-    [password] VARCHAR(100) NOT NULL DEFAULT '', -- Mat Khau Ma Hoa
+    [password] VARCHAR(200) NOT NULL DEFAULT '', -- Mat Khau Ma Hoa
     [create_at] DATETIME,  
     [update_at] DATETIME,
     [is_active] TINYINT DEFAULT 1,
@@ -91,7 +91,7 @@ GO
 CREATE TABLE [dbo].[PRODUCTS]
 (
     [Id] INT NOT NULL IDENTITY(1, 1) PRIMARY KEY, -- Primary Key column
-    [name] NVARCHAR(50) NOT NULL DEFAULT '',
+    [name] NVARCHAR(350) NOT NULL DEFAULT '',
     [price] FLOAT NOT NULL CHECK ([price] >= 0),
     [thumbnail] NVARCHAR(MAX) DEFAULT '',
     [description] TEXT DEFAULT '',
@@ -100,6 +100,20 @@ CREATE TABLE [dbo].[PRODUCTS]
     [update_at] DATETIME,
     FOREIGN KEY (category_id) REFERENCES CATEGORIES(id)
 );
+
+GO
+-- Create a new table called '[PRODUCT_IMAGES]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[PRODUCT_IMAGES]') IS NOT NULL
+DROP TABLE [dbo].[PRODUCT_IMAGES]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[PRODUCT_IMAGES](
+    id INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+    product_id INT,
+    img_url VARCHAR(MAX),
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(Id) ON DELETE CASCADE
+)
 GO
 
 -- Create a new table called '[STATUS_CODES]' in schema '[dbo]'
@@ -163,3 +177,27 @@ CREATE TABLE [dbo].[ORDER_DETAILS]
     FOREIGN KEY (product_id) REFERENCES PRODUCTS(id)
 );
 GO
+
+-- Create a new table called '[Roles]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[ROLES]') IS NOT NULL
+DROP TABLE [dbo].[ROLES]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[ROLES]
+(
+    [Id] INT NOT NULL IDENTITY(1, 1) PRIMARY KEY, -- Primary Key column
+    [name] NVARCHAR(50) NOT NULL DEFAULT '',
+);
+GO
+
+ALTER TABLE USERS 
+    ADD role_id INT
+
+ALTER TABLE USERS
+    ADD FOREIGN KEY (role_id) REFERENCES ROLES(Id)
+
+ALTER TABLE ORDERS
+    ADD tracking_number VARCHAR(100)
+ALTER TABLE ORDERS
+    ADD payment_date DATE
